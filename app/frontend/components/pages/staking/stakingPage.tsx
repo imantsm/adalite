@@ -60,13 +60,30 @@ class StakingPage extends Component<Props, State> {
           </h2>
           <p className="staking-text">
             We are currently implementing staking delegation interface so our users can easily stake
-            their ADA to any stakepool directly from AdaLite. We also plan to operate our own
-            AdaLite stake pool with reasonable fees and we hope AdaLite users will be willing to
-            stake with us. You can check out the new balance check feature{' '}
+            their Incentivized Testnet ADA to any stakepool directly from AdaLite. This feature will
+            be available around Christmas on{' '}
             <a href="https://testnet.adalite.io/" target="_blank">
-              here.
+              https://testnet.adalite.io/
             </a>
+            . Currently you can only check your Testnet balance there.
           </p>
+
+          <p className="staking-text">
+            We launched our own AdaLite stake pool and we hope AdaLite users will be willing to
+            stake with us.
+          </p>
+
+          <div className="stakepool-info">
+            <p>
+              AdaLite stake pool ticker: <b>ADLT1</b>
+            </p>
+            {window.innerWidth > 767 && (
+              <p>
+                Pool id: <b>a19af49ed88574bd181022c38904d76482be0e57778f3ee28a6abf3769d6ac46</b>
+              </p>
+            )}
+          </div>
+
           <form className="staking-form" id="stakingForm">
             <input
               className="input"
