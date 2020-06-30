@@ -140,7 +140,7 @@ const initialState: State = {
     ADALITE_CONFIG.ADALITE_DEVEL_AUTO_LOGIN !== 'true',
   currentTab: 'wallet-info',
   walletIsLoaded: false,
-  showStakingBanner: !(window.localStorage.getItem('dontShowStakingBannerTestnet2') === 'true'),
+  showStakingBanner: !(window.localStorage.getItem('dontShowStakingBannerTestnet3') === 'true'),
   visibleAddresses: [],
   // todo - object (sub-state) from send-ada form
   sendAddress: {fieldValue: ''},
