@@ -180,16 +180,28 @@ const ShelleyLedgerCryptoProvider = async ({network, config}) => {
     const feeStr = `${unsignedTx.fee.fee}`
     const ttlStr = `${network.ttl}`
     const withdrawals = []
-    const response = await ledger.signTransaction(
-      network.networkId,
-      network.protocolMagic,
-      inputs,
-      outputs,
-      feeStr,
-      ttlStr,
-      certificates,
-      withdrawals
-    )
+    const response = await ledger
+      .signTransaction(
+        network.networkId,
+        network.protocolMagic,
+        inputs,
+        outputs,
+        feeStr,
+        ttlStr,
+        certificates,
+        withdrawals
+      )
+      .catch((e) => {
+        console.error(e)
+        console.log('networkId', network.networkId)
+        console.log('protocolMagic', network.protocolMagic)
+        console.log('inputs', inputs)
+        console.log('outputs', outputs)
+        console.log('feeStr', feeStr)
+        console.log('ttlStr', ttlStr)
+        console.log('certificates', certificates)
+        console.log('withdrawals', withdrawals)
+      })
 
     if (response.txHashHex !== unsignedTx.getId()) {
       throw NamedError(
