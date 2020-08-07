@@ -382,21 +382,25 @@ const ShelleyWallet = ({config, randomInputSeed, randomChangeSeed, cryptoProvide
   }
 
   async function getWalletInfo() {
-    const {stakingBalance, nonStakingBalance, balance} = await getBalance()
-    const shelleyAccountInfo = await getAccountInfo()
+    // const {stakingBalance, nonStakingBalance, balance} = await getBalance()
+    // const shelleyAccountInfo = await getAccountInfo()
     const visibleAddresses = await getVisibleAddresses()
-    const transactionHistory = await getHistory()
+    // const transactionHistory = await getHistory()
     // getDelegationHistory
     // getWithdrawalHistory
     return {
-      balance,
+      balance: 0,
       shelleyBalances: {
-        nonStakingBalance,
-        stakingBalance: stakingBalance + shelleyAccountInfo.value,
-        rewardsAccountBalance: shelleyAccountInfo.value,
+        nonStakingBalance: 0,
+        stakingBalance: 0,
+        rewardsAccountBalance: 0,
       },
-      shelleyAccountInfo,
-      transactionHistory,
+      shelleyAccountInfo: {
+        delegation: {},
+        value: 0,
+        hasStakingKey: false,
+      },
+      transactionHistory: [],
       visibleAddresses,
     }
   }
@@ -452,7 +456,7 @@ const ShelleyWallet = ({config, randomInputSeed, randomChangeSeed, cryptoProvide
   }
 
   async function getVisibleAddresses() {
-    const base = await myAddresses.baseExtAddrManager.discoverAddressesWithMeta()
+    const base = await myAddresses.baseExtAddrManager.discoverAddresses()
     return [...base]
   }
 
