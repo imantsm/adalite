@@ -39,6 +39,26 @@ import {
 
 // const isUtxoProfitable = () => true
 
+export async function GetBestBlock() {
+  interface Response {
+    Right: Right
+  }
+
+  interface Right {
+    bestBlock: number
+  }
+
+  let bestBlock: number = 0
+  try {
+    const response: Response = await request(
+      `${ADALITE_CONFIG.ADALITE_BLOCKCHAIN_EXPLORER_URL}/api/v2/bestBlock`
+    )
+    bestBlock = response.Right.bestBlock
+  } catch (e) {}
+
+  return bestBlock
+}
+
 const MyAddresses = ({accountIndex, cryptoProvider, gapLimit, blockchainExplorer}) => {
   const legacyExtManager = AddressManager({
     addressProvider: ByronAddressProvider(cryptoProvider, accountIndex, false),
