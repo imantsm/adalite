@@ -191,6 +191,30 @@ const ShelleyBlockchainExplorer = (config) => {
     return response
   }
 
+  async function getBestBlock() {
+    let bestBlock: number = 0
+    try {
+      const response = await request(
+        `${ADALITE_CONFIG.ADALITE_BLOCKCHAIN_EXPLORER_URL}/api/v2/bestBlock`
+      )
+      bestBlock = response.Right.bestBlock
+    } catch (e) {}
+
+    return bestBlock
+  }
+
+  async function getBestSlot() {
+    let bestSlot: number = 0
+    try {
+      const response = await request(
+        `${ADALITE_CONFIG.ADALITE_BLOCKCHAIN_EXPLORER_URL}/api/v2/bestSlot`
+      )
+      bestSlot = response.Right.bestSlot
+    } catch (e) {}
+
+    return bestSlot
+  }
+
   return {
     getTxHistory: (addresses) => be.getTxHistory(addresses),
     fetchTxRaw: be.fetchTxRaw,
@@ -204,6 +228,8 @@ const ShelleyBlockchainExplorer = (config) => {
     getRewardsBalance,
     getValidStakepools,
     getPoolInfo,
+    getBestBlock,
+    getBestSlot,
   }
 }
 const ShelleyWallet = ({
@@ -260,14 +286,24 @@ const ShelleyWallet = ({
     }
   }
 
-  function prepareTxAux(plan) {
+  async function calculateTtl() {
+    const bestSlot = await blockchainExplorer.getBestSlot()
+
+    if (bestSlot) {
+      return bestSlot + cryptoProvider.network.ttl
+    } else {
+      return cryptoProvider.network.maxTtl
+    }
+  }
+
+  async function prepareTxAux(plan) {
     const txInputs = plan.inputs.map(ShelleyTxInputFromUtxo)
     const txOutputs = plan.outputs.map(({address, coins}) => ShelleyTxOutput(address, coins, false))
     const txCerts = plan.certs.map(({type, accountAddress, poolHash}) =>
       ShelleyTxCert(type, accountAddress, poolHash)
     )
     const txFee = ShelleyFee(plan.fee)
-    const txTtl = ShelleyTtl(cryptoProvider.network.ttl)
+    const txTtl = ShelleyTtl(await calculateTtl())
     const txWithdrawals = plan.withdrawals.map(({accountAddress, rewards}) => {
       return ShelleyWitdrawal(accountAddress, rewards)
     })
