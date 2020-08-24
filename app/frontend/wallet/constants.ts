@@ -105,5 +105,5 @@ export const MINIMAL_LEDGER_APP_VERSION = {
 export const RECOMMENDED_LEDGER_APP_VERSION = {
   major: 2,
   minor: 0,
-  patch: 4,
+  patch: 6,
 }

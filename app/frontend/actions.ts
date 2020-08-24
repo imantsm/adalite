@@ -855,8 +855,8 @@ export default ({setState, getState}: {setState: SetStateFn; getState: GetStateF
       return
     }
     // const cryptoProviderVersionError = wallet.checkCryptoProviderVersion()
-    const redemptionValidationError =
-      redemptionAmountValidator(balance, rewards, plan.fee) || wallet.checkCryptoProviderVersion()
+    const redemptionValidationError = wallet.checkCryptoProviderVersion()
+    // redemptionAmountValidator(balance, rewards, plan.fee) ||
     if (redemptionValidationError) {
       setErrorState(
         'transactionSubmissionError',

@@ -47,32 +47,32 @@ function playsNice(cb) {
 }
 
 function loadScript(success) {
-  if (success) {
+  // if (success) {
     // if everything goes well, load the main script
     const mainScriptTag = document.createElement('script')
     mainScriptTag.type = 'text/javascript'
     mainScriptTag.src = 'js/frontend.bundle.js'
     mainScriptTag.setAttribute('defer', '')
     document.getElementsByTagName('head')[0].appendChild(mainScriptTag)
-  } else {
-    // display fallback HTML for browsers that fail the check
-    document.write(
-      '<!doctype html>' +
-      '<html>' +
-        '<head>' +
-          '<title>AdaLite - Cardano Wallet</title>' +
-          '<link rel="icon" type="image/ico" href="assets/favicon.ico">' +
-        '</head>' +
-        '<body>' +
-          'Unsupported browser. Please try updating it or install the latest version of a supported one. We recommend trying:' +
-          '<ul>' +
-            '<li><a href="https://www.google.com/chrome">Google Chrome</a></li>' +
-            '<li><a href="https://www.mozilla.org/en-US/firefox">Firefox</a></li>' +
-          '</ul>' +
-        '</body>' +
-      '</html>'
-    )
-  }
+  // } else {
+  //   // display fallback HTML for browsers that fail the check
+  //   document.write(
+  //     '<!doctype html>' +
+  //     '<html>' +
+  //       '<head>' +
+  //         '<title>AdaLite - Cardano Wallet</title>' +
+  //         '<link rel="icon" type="image/ico" href="assets/favicon.ico">' +
+  //       '</head>' +
+  //       '<body>' +
+  //         'Unsupported browser. Please try updating it or install the latest version of a supported one. We recommend trying:' +
+  //         '<ul>' +
+  //           '<li><a href="https://www.google.com/chrome">Google Chrome</a></li>' +
+  //           '<li><a href="https://www.mozilla.org/en-US/firefox">Firefox</a></li>' +
+  //         '</ul>' +
+  //       '</body>' +
+  //     '</html>'
+  //   )
+  // }
 }
 
 playsNice(loadScript)

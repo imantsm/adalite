@@ -267,7 +267,7 @@ export function selectMinimalTxPlan(
   if (poolHash) {
     certs.push(createCert('delegation', accountAddress, poolHash))
   }
-  if (rewards) {
+  if (!rewards) {
     withdrawals.push({accountAddress, rewards: rewards as Lovelace})
   }
   const profitableUtxos = utxos.filter(isUtxoProfitable)
