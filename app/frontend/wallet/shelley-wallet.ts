@@ -490,6 +490,15 @@ const ShelleyWallet = ({
     }
   }
 
+  function checkCryptoProviderVersion() {
+    try {
+      cryptoProvider.checkVersion(true)
+    } catch (e) {
+      return {code: e.name, message: e.message}
+    }
+    return null
+  }
+
   return {
     isHwWallet,
     getHwWalletName,
@@ -512,6 +521,7 @@ const ShelleyWallet = ({
     getValidStakepools,
     getWalletInfo,
     getPoolInfo,
+    checkCryptoProviderVersion,
   }
 }
 
