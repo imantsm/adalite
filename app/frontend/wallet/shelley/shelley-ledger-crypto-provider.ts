@@ -221,7 +221,18 @@ const ShelleyLedgerCryptoProvider = async ({network, config, isWebUSB}) => {
     const withdrawals = unsignedTx.withdrawals
       ? [_prepareWithdrawal(unsignedTx.withdrawals, addressToAbsPathMapper)]
       : []
-
+    console.log(
+      JSON.stringify({
+        networkId: network.networkId,
+        magic: network.protocolMagic,
+        inputs,
+        outputs,
+        feeStr,
+        ttlStr,
+        certificates,
+        withdrawals,
+      })
+    )
     const response = await ledger.signTransaction(
       network.networkId,
       network.protocolMagic,
